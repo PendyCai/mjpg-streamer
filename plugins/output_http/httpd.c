@@ -555,6 +555,22 @@ void command(int id, int fd, char *parameter) {
 }
 
 /******************************************************************************
+Description.: This function cleans up ressources allocated by the client_thread
+Input Value.: arg is not used
+Return Value: -
+******************************************************************************/
+void client_cleanup(void *arg) {
+  cfd *pcfd = arg;
+  
+  OPRINT("cleaning up ressources allocated by client thread #%02d\n", pcfd->fd);
+
+  /* client disconnected */
+  pthread_mutex_lock( &pglobal->db );
+  pglobal->clients_num--;
+  pthread_mutex_unlock( &pglobal->db );
+} 
+
+/******************************************************************************
 Description.: Serve a connected TCP-client. This thread function is called
               for each connect of a HTTP client like a webbrowser. It determines
               if it is a valid HTTP request and dispatches between the different
@@ -579,6 +595,14 @@ void *client_thread( void *arg ) {
   }
   else
     return NULL;
+
+  /* set cleanup handler to cleanup ressources */
+  pthread_cleanup_push(client_cleanup, &lcfd);
+  
+  /* new client connected, notify cam_thread to capture buffer */
+  pthread_mutex_lock( &pglobal->db );
+  pglobal->clients_num++;
+  pthread_mutex_unlock( &pglobal->db );
 
   /* initializes the structures */
   init_iobuffer(&iobuf);
@@ -716,6 +740,9 @@ void *client_thread( void *arg ) {
   free_request(&req);
 
   DBG("leaving HTTP client thread\n");
+
+  pthread_cleanup_pop(1);
+  
   return NULL;
 }
 

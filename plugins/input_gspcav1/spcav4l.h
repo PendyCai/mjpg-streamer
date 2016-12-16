@@ -34,7 +34,7 @@
 #include <math.h>
 #include <stdarg.h>
 #include <linux/types.h>
-#include <linux/videodev.h>
+#include <linux/videodev2.h>
 #include <sys/mman.h>
 #include <sys/ioctl.h>
 #include <sys/file.h>

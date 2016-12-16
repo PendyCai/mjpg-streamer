@@ -32,7 +32,7 @@
 
 #include "jdatatype.h"
 #include "encoder.h"
-#include <linux/videodev.h>
+#include <linux/videodev2.h>
 #include "jconfig.h"
 
 

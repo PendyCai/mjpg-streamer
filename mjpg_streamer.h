@@ -53,4 +53,6 @@ struct _globals {
   output out[MAX_OUTPUT_PLUGINS];
   int outcnt;
 
+  int clients_num;
+
 };

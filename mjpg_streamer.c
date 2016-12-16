@@ -24,7 +24,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include <linux/videodev.h>
+#include <linux/videodev2.h>
 #include <sys/ioctl.h>
 #include <errno.h>
 #include <signal.h>
@@ -152,6 +152,7 @@ int main(int argc, char *argv[])
 
   output[0] = "output_http.so --port 8080";
   global.outcnt = 0;
+  global.clients_num = 0;
 
   /* parameter parsing */
   while(1) {

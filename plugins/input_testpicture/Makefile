@@ -49,19 +49,19 @@ testpictures.h: pictures/960x720_1.jpg pictures/640x480_1.jpg pictures/320x240_1
 	@rm testpictures.h.tmp
 
 pictures/160x120_1.jpg: pictures/960x720_1.jpg
-	convert pictures/960x720_1.jpg -resize 160x120! pictures/160x120_1.jpg
+#	convert pictures/960x720_1.jpg -resize 160x120! pictures/160x120_1.jpg
 
 pictures/160x120_2.jpg: pictures/960x720_2.jpg
-	convert pictures/960x720_2.jpg -resize 160x120! pictures/160x120_2.jpg
+#	convert pictures/960x720_2.jpg -resize 160x120! pictures/160x120_2.jpg
 
 pictures/320x240_1.jpg: pictures/960x720_1.jpg
-	convert pictures/960x720_1.jpg -resize 320x240! pictures/320x240_1.jpg
+#	convert pictures/960x720_1.jpg -resize 320x240! pictures/320x240_1.jpg
 
 pictures/320x240_2.jpg: pictures/960x720_2.jpg
-	convert pictures/960x720_2.jpg -resize 320x240! pictures/320x240_2.jpg
+#	convert pictures/960x720_2.jpg -resize 320x240! pictures/320x240_2.jpg
 
 pictures/640x480_1.jpg: pictures/960x720_1.jpg
-	convert pictures/960x720_1.jpg -resize 640x480! pictures/640x480_1.jpg
+#	convert pictures/960x720_1.jpg -resize 640x480! pictures/640x480_1.jpg
 
 pictures/640x480_2.jpg: pictures/960x720_2.jpg
-	convert pictures/960x720_2.jpg -resize 640x480! pictures/640x480_2.jpg
+#	convert pictures/960x720_2.jpg -resize 640x480! pictures/640x480_2.jpg

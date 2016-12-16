@@ -27,7 +27,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include <linux/videodev.h>
+#include <linux/videodev2.h>
 #include <sys/ioctl.h>
 #include <errno.h>
 #include <signal.h>
@@ -670,6 +670,12 @@ void *cam_thread( void *arg ) {
   pthread_cleanup_push(cam_cleanup, NULL);
 
   while( !pglobal->stop ) {
+
+    /* do not capture buffer if no client connected, just wait... */
+    if (pglobal->clients_num < 1) {
+        usleep(1000*10);
+        continue;
+    }
 
     /* grab a frame */
     if( uvcGrab(videoIn) < 0 ) {

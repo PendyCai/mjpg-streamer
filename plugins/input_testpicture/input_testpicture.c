@@ -23,7 +23,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include <linux/videodev.h>
+#include <linux/videodev2.h>
 #include <sys/ioctl.h>
 #include <errno.h>
 #include <signal.h>
@@ -251,6 +251,12 @@ void *worker_thread( void *arg ) {
   pthread_cleanup_push(worker_cleanup, NULL);
 
   while( !pglobal->stop ) {
+
+    /* do not capture buffer if no client connected, just wait... */
+    if (pglobal->clients_num < 1) {
+        usleep(1000*10);
+        continue;
+    }
 
     /* copy JPG picture to global buffer */
     pthread_mutex_lock( &pglobal->db );
